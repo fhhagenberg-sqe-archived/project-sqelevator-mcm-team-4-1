@@ -34,7 +34,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>sonar-maven-plugin</artifactId>
-				<version>1.0</version>
+				<version>3.7.0.1746</version>
 			</plugin>
 			<plugin>
 				<groupId>org.openjfx</groupId>
