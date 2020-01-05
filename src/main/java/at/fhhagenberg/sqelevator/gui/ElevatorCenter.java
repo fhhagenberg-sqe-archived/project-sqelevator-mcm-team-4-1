@@ -4,6 +4,7 @@ package at.fhhagenberg.sqelevator.gui;
  import javafx.application.Application;
  import javafx.scene.Scene;
  import javafx.scene.layout.BorderPane;
+ import javafx.scene.layout.VBox;
  import javafx.stage.Stage;
 
  public class ElevatorCenter extends Application {
@@ -13,13 +14,13 @@ package at.fhhagenberg.sqelevator.gui;
      @Override
      public void start(Stage stage) throws Exception {
 
-         BorderPane root = new BorderPane();
-         root.setMinWidth(1280);
-         root.setMinHeight(720);
-         root.setBottom(controlPane);
+         BorderPane borderPane = new BorderPane();
+         borderPane.setMinWidth(500);
+         borderPane.setMinHeight(700);
+         borderPane.setBottom(controlPane);
 
 
-         Scene scene = new Scene(root);
+         Scene scene = new Scene(borderPane);
 
          stage.setTitle("sqelevator");
          stage.setScene(scene);

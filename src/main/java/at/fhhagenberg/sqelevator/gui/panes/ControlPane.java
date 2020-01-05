@@ -1,25 +1,49 @@
 package at.fhhagenberg.sqelevator.gui.panes;
 
+import at.fhhagenberg.sqelevator.gui.Util;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
 /**
  * Pane that contains the elevator details and manual floor buttons
  */
-public class ControlPane extends FlowPane {
+public class ControlPane extends GridPane {
+
+    // TODO move button labels to config file
+    private String[] buttons = {"4", "3", "2", "1", "0"};
 
     private DetailPane detailPane = new DetailPane();
-    private ButtonPane buttonPane = new ButtonPane();
+    private ButtonPane buttonPane = new ButtonPane(buttons);
 
     public ControlPane() {
 
-        this.getChildren().add(detailPane);
-        this.getChildren().add(buttonPane);
+        // scuffed column spacing
+        ColumnConstraints column = new ColumnConstraints();
+        column.setHgrow(Priority.ALWAYS);
+        this.getColumnConstraints().addAll(column, column);
+
+        VBox detailBox = Util.getCenterBox(detailPane);
+        detailPane.prefWidthProperty().bind(detailBox.widthProperty());
+        detailPane.prefHeightProperty().bind(detailBox.heightProperty());
+        detailPane.setHgap(5);
+        detailPane.setVgap(5);
+        detailPane.setPadding(new Insets(5,5,5,5));
+        this.add(detailBox, 0, 0);
+
+        VBox buttonBox = Util.getCenterBox(buttonPane);
+        buttonPane.prefWidthProperty().bind(buttonBox.widthProperty());
+        buttonPane.prefHeightProperty().bind(buttonBox.heightProperty());
+        buttonPane.setHgap(5);
+        buttonPane.setVgap(5);
+        buttonPane.setPadding(new Insets(5,5,5,5));
+        this.add(buttonBox, 1, 0);
     }
 
     // TODO check how API value updates are provided
@@ -50,7 +74,17 @@ public class ControlPane extends FlowPane {
         private Text weightField = new Text();
         private Text accelerationField = new Text();
 
+        private final int columns = 2;
+        private final int rows = 8;
+
         public DetailPane() {
+
+            for (int i = 0; i < rows; i++) {
+                this.getRowConstraints().add(Util.getMaxRowConstraint());
+            }
+            for (int i = 0; i < columns; i++) {
+                this.getColumnConstraints().add(Util.getMaxColumnConstraint());
+            }
 
             // TODO create strings config
             this.add(new Text("Elevator position\t"), 0, 0);
@@ -88,7 +122,6 @@ public class ControlPane extends FlowPane {
             this.acceleration = acceleration;
         }
 
-        //TODO rework string concatenation
         private void redraw() {
             this.positionField.setText(position + " m");
             this.directionField.setText(direction);
@@ -103,36 +136,29 @@ public class ControlPane extends FlowPane {
 
     protected class ButtonPane extends GridPane {
 
-        // TODO dynamic button creation?
-        public ButtonPane(/*String[] buttons*/) {
-            Button button0 = new Button("0");
-            Button button1 = new Button("1");
-            Button button2 = new Button("2");
-            Button button3 = new Button("3");
-            Button button4 = new Button("4");
+        private final int columns = 2;
 
-            this.add(button4, 0, 0);
-            this.add(button3, 1, 0);
-            this.add(button2, 0, 1);
-            this.add(button1, 1, 1);
-            this.add(button0, 0, 2);
+        public ButtonPane(String[] buttons) {
 
-            // TODO connect to controller
-            button4.setOnAction(actionEvent -> {
-                System.out.println("Button 4 pressed");
-            });
-            button3.setOnAction(actionEvent -> {
-                System.out.println("Button 3 pressed");
-            });
-            button2.setOnAction(actionEvent -> {
-                System.out.println("Button 2 pressed");
-            });
-            button1.setOnAction(actionEvent -> {
-                System.out.println("Button 1 pressed");
-            });
-            button0.setOnAction(actionEvent -> {
-                System.out.println("Button 0 pressed");
-            });
+            for (int i = 0; i < Math.ceil((double)buttons.length / 2.00); i++) {
+                this.getRowConstraints().add(Util.getMaxRowConstraint());
+            }
+            for (int i = 0; i < columns; i++) {
+                this.getColumnConstraints().add(Util.getMaxColumnConstraint());
+            }
+
+            int r = 0;
+            int c = 0;
+            for (String s : buttons) {
+                Button button = Util.getMaxButton(s);
+                this.add(button, c, r);
+                if (c == 1) r++;
+                c = c == 0 ? 1 : 0;
+
+                button.setOnAction(actionEvent -> {
+                    System.out.println("Button " + button.getText() + " pressed");
+                });
+            }
         }
     }
 }
