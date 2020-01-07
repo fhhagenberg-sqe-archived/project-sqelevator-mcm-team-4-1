@@ -1,13 +1,8 @@
 package at.fhhagenberg.sqelevator.gui.panes;
 
 import at.fhhagenberg.sqelevator.gui.Util;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
@@ -136,17 +131,19 @@ public class ControlPane extends GridPane {
 
     protected class ButtonPane extends GridPane {
 
-        private final int columns = 2;
+        // TODO move to config file
+        private final int COLUMNS = 2;
 
         public ButtonPane(String[] buttons) {
 
             for (int i = 0; i < Math.ceil((double)buttons.length / 2.00); i++) {
                 this.getRowConstraints().add(Util.getMaxRowConstraint());
             }
-            for (int i = 0; i < columns; i++) {
+            for (int i = 0; i < COLUMNS; i++) {
                 this.getColumnConstraints().add(Util.getMaxColumnConstraint());
             }
 
+            // TODO review button generation for variable column size
             int r = 0;
             int c = 0;
             for (String s : buttons) {
@@ -156,6 +153,7 @@ public class ControlPane extends GridPane {
                 c = c == 0 ? 1 : 0;
 
                 button.setOnAction(actionEvent -> {
+                    // TODO connect controller to handle button events
                     System.out.println("Button " + button.getText() + " pressed");
                 });
             }
