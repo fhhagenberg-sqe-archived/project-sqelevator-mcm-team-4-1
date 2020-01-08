@@ -14,6 +14,7 @@
 		
 		<sonar.organization>fhhagenberg-sqe</sonar.organization>
         <sonar.projectKey>project-sqelevator-mcm-team-4-1</sonar.projectKey>
+		<sonar.projectName>ElevatorCC - Team 4</sonar.projectName>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
 
