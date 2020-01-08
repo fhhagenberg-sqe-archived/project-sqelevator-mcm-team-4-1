@@ -3,47 +3,58 @@ package at.fhhagenberg.sqelevator.gui.panes;
 import at.fhhagenberg.sqelevator.gui.Util;
 import at.fhhagenberg.sqelevator.gui.cells.ElevatorCell;
 import at.fhhagenberg.sqelevator.gui.cells.InfoCell;
-import javafx.geometry.Insets;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class GraphicPane extends GridPane {
+
+    // TODO move floor names to config file
+    private final String[] FLOOR_NAMES = {"Floor 4", "Floor 3", "Floor 2",
+    "Floor 1", "Ground"};
 
     // TODO move to config file
     private final int FLOORS = 5;
     private final int ELEVATORS = 3;
 
-    private TableView<Pane> tableView = new TableView<>();
+    private ArrayList<InfoCell> infoCells = new ArrayList<>();
+    private ArrayList<ArrayList<ElevatorCell>> elevatorCells = new ArrayList<>();
 
     public GraphicPane() {
 
-        VBox detailBox = Util.getCenterBox(tableView);
-        this.add(detailBox, 0, 0);
-
-        TableColumn<String, InfoCell> infoColumn = new TableColumn<>("Info");
-        LinkedList<InfoCell> infoCells = new LinkedList<>();
-        for (int i = FLOORS - 1; i >= 0; i--) {
-            InfoCell infoCell = new InfoCell(String.valueOf(i));
-            infoCells.add(infoCell);
-            infoColumn.setCellFactory(cell -> infoCell);
+        for (int i = 0; i < FLOORS + 1; i++) {
+            this.getRowConstraints().add(Util.getMaxRowConstraint());
+        }
+        for (int i = 0; i < ELEVATORS + 1; i++) {
+            this.getColumnConstraints().add(Util.getMaxColumnConstraint());
         }
 
-        LinkedList<LinkedList<ElevatorCell>> elevatorCells = new LinkedList<>();
         for (int i = 0; i < FLOORS; i++) {
-            elevatorCells.add(new LinkedList<ElevatorCell>());
-            TableColumn<String, ElevatorCell> elevatorColumn = new TableColumn<>("Elevator");
-            for (int j = 0; j < ELEVATORS; j++) {
-                ElevatorCell elevatorCell = new ElevatorCell();
-                elevatorCells.get(i).add(elevatorCell);
-                elevatorColumn.setCellFactory(cell -> elevatorCell);
+            InfoCell cell = new InfoCell(FLOOR_NAMES[i]);
+            cell.setBorder(Util.getBorder());
+            infoCells.add(cell);
+            cell.setAlignment(Pos.CENTER);
+            this.add(cell, 0, i);
+        }
+
+        for (int i = 1; i <= ELEVATORS; i++) {
+            elevatorCells.add(new ArrayList<>());
+            for (int j = 0; j < FLOORS; j++) {
+                ElevatorCell cell = new ElevatorCell();
+                cell.setBorder(Util.getBorder());
+                elevatorCells.get(i - 1).add(cell);
+                cell.setAlignment(Pos.CENTER);
+                this.add(cell, i, j);
             }
         }
+    }
+
+    public void updateCall(int elevator, int floor) {
+
+    }
+
+    public void updateHere(int elevator, int floor) {
+
     }
 }

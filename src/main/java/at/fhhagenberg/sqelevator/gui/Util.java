@@ -44,4 +44,9 @@ public class Util {
         //button.setStyle("-fx-focus-color: transparent; -fx-faint-focus-color: transparent;");
         return button;
     }
+
+    public static Border getBorder() {
+        return new Border(new BorderStroke(Color.BLACK,
+                BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
+    }
 }
