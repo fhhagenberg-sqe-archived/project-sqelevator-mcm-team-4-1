@@ -11,22 +11,12 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
+		
+		<sonar.organization>fhhagenberg-sqe</sonar.organization>
+        <sonar.projectKey>project-sqelevator-mcm-team-4-1</sonar.projectKey>
+		<sonar.projectName>ElevatorCC - Team 4</sonar.projectName>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
-
-	<profiles>
-		<profile>
-			<id>sonar</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<!-- Optional URL to server. Default value is http://localhost:9000 -->
-				<sonar.host.url>
-					http://localhost:9000
-				</sonar.host.url>
-			</properties>
-		</profile>
-	</profiles>
 
 	<dependencies>
 		<dependency>
