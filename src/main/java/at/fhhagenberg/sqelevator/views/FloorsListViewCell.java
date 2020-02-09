@@ -60,7 +60,7 @@ public class FloorsListViewCell extends ListCell<Floor> {
 	            
 	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
 	            if(elevatorSystem.getFloorButtonDown(floor.getNumber())) {
-	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/direction_down_pressed.png").toString());
+	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/direction_down_pressed.jpg").toString());
 	            } else {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/direction_down.png").toString());
 	            }
