@@ -19,7 +19,7 @@ public class ElevatorsListViewCell extends ListCell<Elevator> {
 	public ElevatorsListViewCell(IElevator elevatorSystem) {
 		this.elevatorSystem = elevatorSystem;
 	}
-
+ 
 	@Override
 	public void updateItem(Elevator elevator, boolean empty) {
 		super.updateItem(elevator, empty);
@@ -27,12 +27,11 @@ public class ElevatorsListViewCell extends ListCell<Elevator> {
         if (elevator == null || empty) {
             setGraphic(null);
         } else {
-            
+             
         	try {
             	URL location = ElevatorExample.class.getClassLoader().getResource("layouts/elevator.fxml");
                 FXMLLoader loader = new FXMLLoader(location); 
                 
-                //loader.getNamespace().put("elevator", elevator);
                 Pane root = loader.load();
                 
                 controller =  loader.<ElevatorManuelController>getController();

@@ -19,7 +19,7 @@ public class Elevator {
 	public IntegerProperty elevatorPositionProperty;
 	
 	public StringProperty doorStatusProperty;
-	
+	 
 	public BooleanProperty automaticProperty;
  
 	private List<Integer> targets = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Elevator {
 	 */
 	public int getNumber() {
 		return numberProperty.get();
-	}
+	} 
 
 	/**
 	 * Sets weight/payload of the elevator

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import at.fhhagenberg.sqelevator.model.Floor;
-import at.fhhagenberg.sqelevator.views.FloorsListViewCell;
+import at.fhhagenberg.sqelevator.views.ElevatorFloorDirectionListViewCell;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
@@ -15,7 +15,7 @@ import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import sqelevator.IElevator;
 
-public class FloorsController {
+public class ElevatorFloorController {
 	
 	@FXML private ListView<Floor> lvFloors;
 	
@@ -23,7 +23,7 @@ public class FloorsController {
 	
 	protected List<Floor> floors = new ArrayList<>();
 	protected ListProperty<Floor> listPropertyFloors = new SimpleListProperty<>();
-
+ 
 	
 	public void init(IElevator elevatorSystem) {
 		try {	
@@ -38,7 +38,7 @@ public class FloorsController {
 				
 				@Override
 				public ListCell<Floor> call(ListView<Floor> param) {
-					return new FloorsListViewCell(elevatorSystem);
+					return new ElevatorFloorDirectionListViewCell(elevatorSystem);
 				}
 			});
 	        

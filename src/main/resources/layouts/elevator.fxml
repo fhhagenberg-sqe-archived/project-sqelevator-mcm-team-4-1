@@ -39,14 +39,14 @@
 		<ToggleButton fx:id="tbModeManual" text="Manual" toggleGroup="$tgMode"
 						GridPane.columnIndex="1" GridPane.rowIndex="1" selected="true"/>
 						
-		<Spinner fx:id="spGoTo"
+		<Spinner fx:id="start"
 					GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-		<Button fx:id="btGoTo" text="Start"
+		<Button fx:id="btStart" text="Start"
 					GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 					
 		<Label text="Weight:" 
 				GridPane.columnIndex="0" GridPane.rowIndex="3"/>
-		<Label fx:id="lbPayload"
+		<Label fx:id="lbWeight"
 				GridPane.columnIndex="1" GridPane.rowIndex="3"/>
 				
 		<Label text="Speed:" 

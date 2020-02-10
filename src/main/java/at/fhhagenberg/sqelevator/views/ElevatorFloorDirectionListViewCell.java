@@ -15,18 +15,18 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import sqelevator.IElevator;
 
-public class FloorsListViewCell extends ListCell<Floor> {
+public class ElevatorFloorDirectionListViewCell extends ListCell<Floor> {
 	
 	private IElevator elevatorSystem;
 	
-	public FloorsListViewCell(IElevator elevatorSystem) {
+	public ElevatorFloorDirectionListViewCell(IElevator elevatorSystem) {
 		this.elevatorSystem = elevatorSystem;
 	}
 	
 	@Override
 	public void updateItem(Floor floor, boolean empty) {
 		super.updateItem(floor, empty);
-
+ 
 		if (empty) { 
 			setText(null);
 			setGraphic(null);
@@ -35,18 +35,15 @@ public class FloorsListViewCell extends ListCell<Floor> {
 			try {
 				setText(null);
 				 
-	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
 	            HBox root = new HBox();
 	            root.setPadding(new Insets(0, 10, 0, 10));
 	            root.setAlignment(Pos.CENTER);
 	 
-	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
 	            Label number = new Label(String.valueOf(floor.getFloorNumber()+1));
 	            number.setFont(Font.font("FontAwesome", FontWeight.BOLD, 16));
 	            number.getStyleClass().add("cache-list-icon");
 	            root.getChildren().addAll(number);
 	 
-	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
 	            Image img;
 	            if(elevatorSystem.getFloorButtonUp(floor.getFloorNumber())) {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/direction_up_pressed.png").toString());
@@ -58,7 +55,6 @@ public class FloorsListViewCell extends ListCell<Floor> {
 	            up.setFitWidth(25);
 	            root.getChildren().addAll(up);
 	            
-	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
 	            if(elevatorSystem.getFloorButtonDown(floor.getFloorNumber())) {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/direction_down_pressed.jpg").toString());
 	            } else {

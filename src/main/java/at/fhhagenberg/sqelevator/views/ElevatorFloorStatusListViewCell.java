@@ -12,16 +12,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import sqelevator.IElevator;
 
-public class ElevatorFloorsListViewCell extends ListCell<Floor> {
+public class ElevatorFloorStatusListViewCell extends ListCell<Floor> {
 
 	private IElevator elevatorSystem;
 	private int elevatorNumber;
 	 
-	public ElevatorFloorsListViewCell(IElevator elevatorSystem, int elevatorNumber) {
+	public ElevatorFloorStatusListViewCell(IElevator elevatorSystem, int elevatorNumber) {
 		this.elevatorSystem = elevatorSystem;
 		this.elevatorNumber = elevatorNumber;
 	}
-	 
+	  
 	@Override
 	public void updateItem(Floor floor, boolean empty) {
 		super.updateItem(floor, empty);

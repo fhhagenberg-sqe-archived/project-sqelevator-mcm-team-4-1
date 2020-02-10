@@ -18,11 +18,11 @@ import javafx.util.converter.NumberStringConverter;
 import sqelevator.IElevator;
 
 public class ElevatorManuelController {
-
+ 
 	@FXML
 	private ListView<Floor> elevatorFloors;
 	@FXML
-	private ElevatorFloorsController elevatorFloorsController;
+	private ElevatorFloorsManuelController elevatorFloorsController;
 
 	@FXML
 	private Label lbHeader;
@@ -35,12 +35,12 @@ public class ElevatorManuelController {
 	private ToggleButton tbModeManual;
 
 	@FXML
-	private Spinner<Integer> spGoTo;
+	private Spinner<Integer> start;
 	@FXML
-	private Button btGoTo;
+	private Button btStart;
 
 	@FXML
-	private Label lbPayload;
+	private Label lbWeight;
 	@FXML
 	private Label lbSpeed;
 	@FXML
@@ -60,26 +60,26 @@ public class ElevatorManuelController {
   
 			// bind elevator properties to GUI
 			lbHeader.textProperty().bindBidirectional(elevator.numberProperty, new NumberStringConverter());
-			lbPayload.textProperty().bindBidirectional(elevator.weightProperty, new NumberStringConverter());
+			lbWeight.textProperty().bindBidirectional(elevator.weightProperty, new NumberStringConverter());
 			lbSpeed.textProperty().bindBidirectional(elevator.speedProperty, new NumberStringConverter());
 			lbCurrentFloor.textProperty().bindBidirectional(elevator.elevatorPositionProperty, new NumberStringConverter());
 			lbDoor.textProperty().bind(elevator.doorStatusProperty);
 			tbModeAutomatic.selectedProperty().bindBidirectional(elevator.automaticProperty);
 
-			// Go to is only enabled if manual mode is selected
-			spGoTo.disableProperty().bind(tbModeManual.selectedProperty().not());
-			btGoTo.disableProperty().bind(tbModeManual.selectedProperty().not());
+			// Start is only enabled if manual mode is selected
+			start.disableProperty().bind(tbModeManual.selectedProperty().not());
+			btStart.disableProperty().bind(tbModeManual.selectedProperty().not());
 
 			SpinnerValueFactory<Integer> floorsValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1,
 					elevatorSystem.getFloorNum());
-			spGoTo.setValueFactory(floorsValueFactory);
+			start.setValueFactory(floorsValueFactory);
 
-			btGoTo.setOnAction(new EventHandler<ActionEvent>() { 
+			btStart.setOnAction(new EventHandler<ActionEvent>() { 
 
 				@Override
 				public void handle(ActionEvent e) {
 					try {
-						elevatorSystem.setTarget(elevator.getNumber(), spGoTo.getValue().intValue() - 1);
+						elevatorSystem.setTarget(elevator.getNumber(), start.getValue().intValue() - 1);
 					} catch (RemoteException e1) {
 						e1.printStackTrace();
 					}
