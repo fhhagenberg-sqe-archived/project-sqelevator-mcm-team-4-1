@@ -16,7 +16,7 @@ public class ElevatorFloorsListViewCell extends ListCell<Floor> {
 
 	private IElevator elevatorSystem;
 	private int elevatorNumber;
-	
+	 
 	public ElevatorFloorsListViewCell(IElevator elevatorSystem, int elevatorNumber) {
 		this.elevatorSystem = elevatorSystem;
 		this.elevatorNumber = elevatorNumber;
@@ -32,13 +32,10 @@ public class ElevatorFloorsListViewCell extends ListCell<Floor> {
 		} else {	
 			 try {
 				setText(null);
-				 
-	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
 	            HBox root = new HBox();
 	            root.setPadding(new Insets(0, 10, 0, 10));
 	            root.setAlignment(Pos.CENTER);
-	 
-	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
+
 	            Image img;
 	            if(elevatorSystem.getElevatorButton(elevatorNumber, floor.getFloorNumber())) {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/lamp_on.png").toString());
@@ -47,19 +44,7 @@ public class ElevatorFloorsListViewCell extends ListCell<Floor> {
 	            }
 	            
 	            Image floorStatus = null;
-				if(elevatorSystem.getElevatorFloor(elevatorNumber) == floor.getFloorNumber()) {
-					if(elevatorSystem.getTarget(elevatorNumber) == floor.getFloorNumber()) {
-						floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_arrived.png").toString());
-					}
-					else if(elevatorSystem.getTarget(elevatorNumber) < floor.getFloorNumber()) {
-					    floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_moving_down.png").toString());
-					}
-				    else if(elevatorSystem.getTarget(elevatorNumber) > floor.getFloorNumber()) {
-				    	floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_moving_up.png").toString());
-				    }
-				} else {
-			    	floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_not_moving.png").toString());
-			    }
+				floorStatus = elevatorTarget(floor, floorStatus);
 				
 	            ImageView elevatorFloorStatus = new ImageView(floorStatus);
 	            elevatorFloorStatus.setFitHeight(25);
@@ -77,6 +62,29 @@ public class ElevatorFloorsListViewCell extends ListCell<Floor> {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	/**
+	 * @param floor
+	 * @param floorStatus
+	 * @return
+	 * @throws RemoteException
+	 */
+	private Image elevatorTarget(Floor floor, Image floorStatus) throws RemoteException {
+		if(elevatorSystem.getElevatorFloor(elevatorNumber) == floor.getFloorNumber()) {
+			if(elevatorSystem.getTarget(elevatorNumber) == floor.getFloorNumber()) {
+				floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_arrived.png").toString());
+			}
+			else if(elevatorSystem.getTarget(elevatorNumber) < floor.getFloorNumber()) {
+			    floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_moving_down.png").toString());
+			}
+		    else if(elevatorSystem.getTarget(elevatorNumber) > floor.getFloorNumber()) {
+		    	floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_moving_up.png").toString());
+		    }
+		} else {
+			floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_not_moving.png").toString());
+		}
+		return floorStatus;
 	}
 
 	public int getElevatorNumber() {
