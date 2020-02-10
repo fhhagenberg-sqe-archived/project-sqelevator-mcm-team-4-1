@@ -25,7 +25,7 @@ public class ElevatorExample extends Application {
 	private static final int WINDOW_HEIGHT = 800;
 	private static final int WINDOW_WIDTH = 1000;
 
-	private IElevator elevatorSystem;
+	private static IElevator elevatorSystem;
 	private ElevatorControlPanel controlPanel;
 
 	public static ScheduledExecutorService pollingExecutor;
@@ -34,7 +34,7 @@ public class ElevatorExample extends Application {
 		rmiSimulatorConnection();
 	}
 	
-	private void rmiSimulatorConnection() {
+	public static void rmiSimulatorConnection() {
 		try {
 			elevatorSystem = (IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
 		} catch (Exception e) {
@@ -75,7 +75,7 @@ public class ElevatorExample extends Application {
 		}
 	}
 
-	private void alertConnectionFailed() {
+	public static void alertConnectionFailed() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 
 		alert.setTitle("Connection failed!");
