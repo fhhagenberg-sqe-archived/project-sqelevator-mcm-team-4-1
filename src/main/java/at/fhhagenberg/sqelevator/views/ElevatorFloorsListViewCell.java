@@ -21,7 +21,7 @@ public class ElevatorFloorsListViewCell extends ListCell<Floor> {
 		this.elevatorSystem = elevatorSystem;
 		this.elevatorNumber = elevatorNumber;
 	}
-	
+	 
 	@Override
 	public void updateItem(Floor floor, boolean empty) {
 		super.updateItem(floor, empty);
@@ -40,21 +40,21 @@ public class ElevatorFloorsListViewCell extends ListCell<Floor> {
 	 
 	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
 	            Image img;
-	            if(elevatorSystem.getElevatorButton(elevatorNumber, floor.getNumber())) {
+	            if(elevatorSystem.getElevatorButton(elevatorNumber, floor.getFloorNumber())) {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/lamp_on.png").toString());
 	            } else {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/lamp_off.png").toString());
 	            }
 	            
 	            Image floorStatus = null;
-				if(elevatorSystem.getElevatorFloor(elevatorNumber) == floor.getNumber()) {
-					if(elevatorSystem.getTarget(elevatorNumber) == floor.getNumber()) {
+				if(elevatorSystem.getElevatorFloor(elevatorNumber) == floor.getFloorNumber()) {
+					if(elevatorSystem.getTarget(elevatorNumber) == floor.getFloorNumber()) {
 						floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_arrived.png").toString());
 					}
-					else if(elevatorSystem.getTarget(elevatorNumber) < floor.getNumber()) {
+					else if(elevatorSystem.getTarget(elevatorNumber) < floor.getFloorNumber()) {
 					    floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_moving_down.png").toString());
 					}
-				    else if(elevatorSystem.getTarget(elevatorNumber) > floor.getNumber()) {
+				    else if(elevatorSystem.getTarget(elevatorNumber) > floor.getFloorNumber()) {
 				    	floorStatus = new Image(ElevatorExample.class.getClassLoader().getResource("images/elevator_moving_up.png").toString());
 				    }
 				} else {

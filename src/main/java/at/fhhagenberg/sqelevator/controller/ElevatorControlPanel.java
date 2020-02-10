@@ -20,12 +20,12 @@ import javafx.util.Callback;
 import sqelevator.IElevator;
 
 public class ElevatorControlPanel {
-
+ 
 	@FXML
 	private ListView<Floor> floors;
 	@FXML
 	private FloorsController floorsController;
-
+ 
 	@FXML
 	private ListView<Elevator> lvElevators;
 
@@ -35,7 +35,7 @@ public class ElevatorControlPanel {
 	private List<ElevatorsListViewCell> cells = new ArrayList<>();
 
 	private IElevator elevatorSystem;
-	private long clockTime;
+	private long clockTime; 
 
 	private List<Integer> requestTargetQueue = new ArrayList<>();
 	private List<Integer> elevatorTargetQueue = new ArrayList<>();
@@ -189,12 +189,12 @@ public class ElevatorControlPanel {
 		int payload = elevatorSystem.getElevatorWeight(number);
 		int speed = elevatorSystem.getElevatorSpeed(number);
 		int doorStatus = elevatorSystem.getElevatorDoorStatus(number);
-		int currentFloor = elevatorSystem.getElevatorPosition(number);
+		int currentElevLocation = elevatorSystem.getElevatorPosition(number);
 
-		elevator.setPayload(payload);
+		elevator.setWeight(payload);
 		elevator.setSpeed(speed);
 		elevator.setDoorStatus(doorStatus);
-		elevator.setCurrentFloor(currentFloor);
+		elevator.setCurrentElePosition(currentElevLocation);
 
 		return elevator;
 	}

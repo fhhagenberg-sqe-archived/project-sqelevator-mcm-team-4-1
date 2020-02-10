@@ -12,60 +12,90 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Elevator {
-
-	public IntegerProperty numberProperty;
-	public IntegerProperty payloadProperty;
+	
+	public IntegerProperty weightProperty;
 	public IntegerProperty speedProperty;
-	public IntegerProperty currentFloorProperty;
+	public IntegerProperty numberProperty;
+	public IntegerProperty elevatorPositionProperty;
+	
 	public StringProperty doorStatusProperty;
+	
 	public BooleanProperty automaticProperty;
-
+ 
 	private List<Integer> targets = new ArrayList<>();
 
+	/**
+	 * initialize string and integer properties
+	 * @param number returns elevator number from elevator simulator 
+	 * @since 1.0
+	 */
 	public Elevator(int number) {
 		this.numberProperty = new SimpleIntegerProperty(number);
-		this.payloadProperty = new SimpleIntegerProperty(0);
+		this.weightProperty = new SimpleIntegerProperty(0);
 		this.speedProperty = new SimpleIntegerProperty(0);
-		this.currentFloorProperty = new SimpleIntegerProperty(0);
+		this.elevatorPositionProperty = new SimpleIntegerProperty(0);
 		this.doorStatusProperty = new SimpleStringProperty("Closed");
 		automaticProperty = new SimpleBooleanProperty(false);
 
 	}
 
+	/**
+	 * @return  number
+	 * @since 1.0
+	 */
 	public int getNumber() {
 		return numberProperty.get();
 	}
 
-	public void setPayload(int payload) {
-		payloadProperty.set(payload);
+	/**
+	 * Sets weight/payload of the elevator
+	 * @since 1.0
+	 */
+	public void setWeight(int payload) {
+		weightProperty.set(payload);
 	}
 
+	/**
+	 * Sets speed of the elevator
+	 * @since 1.0
+	 */
 	public void setSpeed(int speed) {
 		speedProperty.set(speed);
 	}
 
+	/**
+	 * @param doorStatus - integer value about the status of the door 
+	 * Sets door status of the elevator
+	 * @since 1.0
+	 */
 	public void setDoorStatus(int doorStatus) {
-		String doorStatusStr = "";
+		String doorStatusString = "";
 
 		switch (doorStatus) {
 		case 1:
-			doorStatusStr = "Open";
+			doorStatusString = "Open";
 			break;
 		case 2:
-			doorStatusStr = "Closed";
+			doorStatusString = "Closed";
 		}
 
-		doorStatusProperty.set(doorStatusStr);
+		doorStatusProperty.set(doorStatusString);
 	}
 
-	public void getAutomatic(boolean isAutomatic) {
-		automaticProperty.set(isAutomatic);
-	}
-
+	/**
+	 * @return automatic mode
+	 * @since 1.0
+	 */
 	public boolean getAutomatic() {
 		return automaticProperty.get();
 	}
 
+	/**
+	 * @param index - integer
+	 * @param target - integer
+	 * insert target destination
+	 * @since 1.0
+	 */
 	public void insertTarget(int index, int target) {
 		if (!targets.contains(target)) {
 			if (targets.isEmpty() || index == -1) {
@@ -76,6 +106,10 @@ public class Elevator {
 		}
 	}
 
+	/**
+	 * @return next target value 
+	 * @since 1.0
+	 */
 	public int getNextTarget() {
 		if (!targets.isEmpty()) {
 			return targets.get(0);
@@ -84,19 +118,23 @@ public class Elevator {
 		}
 	}
 
+	/**
+	 * Removes target value 
+	 * @since 1.0
+	 */
 	public void removeTargetFromList() {
 		if (!targets.isEmpty()) {
 			int currentFloor = targets.get(0);
 			targets.remove(0);
 
 			if (!targets.isEmpty()) {
-				refactor(currentFloor, targets.get(0));
+				refresh(currentFloor, targets.get(0));
 			}
 		}
 
 	}
 
-	private void refactor(int currentFloor, int nextFloor) {
+	private void refresh(int currentFloor, int nextFloor) {
 		List<Integer> targetsInBetween = new ArrayList<>();
 
 		for (int i = 0; i < targets.size(); i++) {
@@ -118,8 +156,13 @@ public class Elevator {
 		targets.addAll(0, targetsInBetween);
 	}
 
-	public void setCurrentFloor(int currentFloor) {
-		currentFloorProperty.set(currentFloor + 1);
+	/**
+	 * @param currentPosition - integer 
+	 * sets current elevator position
+	 * @since 1.0
+	 */
+	public void setCurrentElePosition(int currentPosition) {
+		elevatorPositionProperty.set(currentPosition + 1);
 
 	}
 }

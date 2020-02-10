@@ -26,7 +26,7 @@ public class ElevatorExample extends Application {
 	private static final int WINDOW_WIDTH = 1000;
 
 	private IElevator elevatorSystem;
-	private ElevatorControlPanel controller;
+	private ElevatorControlPanel controlPanel;
 
 	public static ScheduledExecutorService pollingExecutor;
 
@@ -52,13 +52,13 @@ public class ElevatorExample extends Application {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("layouts/elevator_control_center.fxml"));
 			Pane root = fxmlLoader.load();
 
-			controller = fxmlLoader.<ElevatorControlPanel>getController();
-			controller.init(elevatorSystem);
+			controlPanel = fxmlLoader.<ElevatorControlPanel>getController();
+			controlPanel.init(elevatorSystem);
 
 			Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
 			scene.getStylesheets().add(getClass().getClassLoader().getResource("application.css").toExternalForm());
 
-			primaryStage.setTitle("Elevator Control Center");
+			primaryStage.setTitle("Elevator Control Panel");
 			primaryStage.setMinWidth(WINDOW_WIDTH);
 			primaryStage.setMinHeight(WINDOW_HEIGHT);
 			primaryStage.setScene(scene);
@@ -79,8 +79,8 @@ public class ElevatorExample extends Application {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 
 		alert.setTitle("Connection failed!");
-		alert.setHeaderText("The connection to the elevator simulator failed!");
-		alert.setContentText("Do you want to retry?");
+		alert.setHeaderText("The simulator connection failed!");
+		alert.setContentText("Do you want to retry? :(");
 
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK) {
@@ -93,7 +93,7 @@ public class ElevatorExample extends Application {
 	private void startPolling() {
 		Runnable pollingRunnable = new Runnable() {
 			public void run() {
-				Platform.runLater(controller.updateRunnable);
+				Platform.runLater(controlPanel.updateRunnable);
 			}
 		};
 

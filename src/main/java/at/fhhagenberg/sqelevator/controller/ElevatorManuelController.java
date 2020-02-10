@@ -57,12 +57,12 @@ public class ElevatorManuelController {
 			this.elevator = elevator;
 
 			elevatorFloorsController.init(elevatorSystem, elevator.getNumber());
-
+  
 			// bind elevator properties to GUI
 			lbHeader.textProperty().bindBidirectional(elevator.numberProperty, new NumberStringConverter());
-			lbPayload.textProperty().bindBidirectional(elevator.payloadProperty, new NumberStringConverter());
+			lbPayload.textProperty().bindBidirectional(elevator.weightProperty, new NumberStringConverter());
 			lbSpeed.textProperty().bindBidirectional(elevator.speedProperty, new NumberStringConverter());
-			lbCurrentFloor.textProperty().bindBidirectional(elevator.currentFloorProperty, new NumberStringConverter());
+			lbCurrentFloor.textProperty().bindBidirectional(elevator.elevatorPositionProperty, new NumberStringConverter());
 			lbDoor.textProperty().bind(elevator.doorStatusProperty);
 			tbModeAutomatic.selectedProperty().bindBidirectional(elevator.automaticProperty);
 
@@ -74,7 +74,7 @@ public class ElevatorManuelController {
 					elevatorSystem.getFloorNum());
 			spGoTo.setValueFactory(floorsValueFactory);
 
-			btGoTo.setOnAction(new EventHandler<ActionEvent>() {
+			btGoTo.setOnAction(new EventHandler<ActionEvent>() { 
 
 				@Override
 				public void handle(ActionEvent e) {

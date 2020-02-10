@@ -27,7 +27,7 @@ public class FloorsListViewCell extends ListCell<Floor> {
 	public void updateItem(Floor floor, boolean empty) {
 		super.updateItem(floor, empty);
 
-		if (empty) {
+		if (empty) { 
 			setText(null);
 			setGraphic(null);
 		} 
@@ -41,14 +41,14 @@ public class FloorsListViewCell extends ListCell<Floor> {
 	            root.setAlignment(Pos.CENTER);
 	 
 	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
-	            Label number = new Label(String.valueOf(floor.getNumber()+1));
+	            Label number = new Label(String.valueOf(floor.getFloorNumber()+1));
 	            number.setFont(Font.font("FontAwesome", FontWeight.BOLD, 16));
 	            number.getStyleClass().add("cache-list-icon");
 	            root.getChildren().addAll(number);
 	 
 	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
 	            Image img;
-	            if(elevatorSystem.getFloorButtonUp(floor.getNumber())) {
+	            if(elevatorSystem.getFloorButtonUp(floor.getFloorNumber())) {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/direction_up_pressed.png").toString());
 	            } else {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/direction_up.png").toString());
@@ -59,7 +59,7 @@ public class FloorsListViewCell extends ListCell<Floor> {
 	            root.getChildren().addAll(up);
 	            
 	            // DO NOT CREATE INSTANCES IN THIS METHOD, THIS IS BAD!
-	            if(elevatorSystem.getFloorButtonDown(floor.getNumber())) {
+	            if(elevatorSystem.getFloorButtonDown(floor.getFloorNumber())) {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/direction_down_pressed.jpg").toString());
 	            } else {
 	            	img = new Image(ElevatorExample.class.getClassLoader().getResource("images/direction_down.png").toString());
