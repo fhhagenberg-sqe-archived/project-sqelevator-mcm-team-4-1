@@ -8,10 +8,7 @@
 			xmlns="http://javafx.com/javafx/8.0.40"
 			fx:controller="at.fhhagenberg.sqelevator.controller.ElevatorManuelController">
 		
-			<AnchorPane GridPane.columnIndex="0" GridPane.rowIndex="1">
-		<fx:include fx:id="elevatorFloors" source="elevator_floors.fxml" 
-					AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-   	</AnchorPane>
+
    	
 	<columnConstraints>
 		<ColumnConstraints minWidth="150" maxWidth="150" /> 
@@ -68,6 +65,9 @@
 	
 	</GridPane>
 				
-
+			<AnchorPane GridPane.columnIndex="0" GridPane.rowIndex="1">
+		<fx:include fx:id="elevatorFloors" source="elevator_floors.fxml" 
+					AnchorPane.topAnchor="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+   	</AnchorPane>
 </GridPane>
 
