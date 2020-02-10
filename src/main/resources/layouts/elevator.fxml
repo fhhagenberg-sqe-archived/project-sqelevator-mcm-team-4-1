@@ -41,10 +41,10 @@
 						
 		<Spinner fx:id="spGoTo"
 					GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-		<Button fx:id="btGoTo" text="Go to"
+		<Button fx:id="btGoTo" text="Start"
 					GridPane.columnIndex="1" GridPane.rowIndex="2"/>
 					
-		<Label text="Payload:" 
+		<Label text="Weight:" 
 				GridPane.columnIndex="0" GridPane.rowIndex="3"/>
 		<Label fx:id="lbPayload"
 				GridPane.columnIndex="1" GridPane.rowIndex="3"/>
@@ -58,7 +58,7 @@
 				GridPane.columnIndex="0" GridPane.rowIndex="5"/>
 		<Label fx:id="lbDoor"
 				GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-		<Label text="CurFloor:" 
+		<Label text="ElePosition:" 
 				GridPane.columnIndex="0" GridPane.rowIndex="6"/>
 		<Label fx:id="lbCurrentFloor"
 				GridPane.columnIndex="1" GridPane.rowIndex="6"/>
