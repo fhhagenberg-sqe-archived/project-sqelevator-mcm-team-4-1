@@ -6,9 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class ElevatorExampleTest {
 
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
+	
+	
 
 }
